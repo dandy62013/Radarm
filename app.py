@@ -649,10 +649,36 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-with st.expander("Conexión Spotify"):
-    if st.button("Probar conexión con Spotify"):
-        try:
-            token = obtener_token_spotify()
-            st.success("Conexión con Spotify correcta.")
-        except Exception as e:
-            st.error(f"No se pudo conectar: {e}")
+
+with st.expander("Explorar Spotify"):
+    nombre_spotify = st.text_input(
+        "Buscar artista en Spotify",
+        placeholder="Ej. Alcalá Norte"
+    )
+
+    if st.button("Buscar en Spotify"):
+        if not nombre_spotify.strip():
+            st.warning("Escribe un nombre.")
+        else:
+            try:
+                token = obtener_token_spotify()
+                respuesta = requests.get(
+                    "https://api.spotify.com/v1/search",
+                    headers={"Authorization": f"Bearer {token}"},
+                    params={
+                        "q": nombre_spotify.strip(),
+                        "type": "artist",
+                        "limit": 5
+                    },
+                    timeout=15,
+                )
+                respuesta.raise_for_status()
+                artistas_spotify = respuesta.json()["artists"]["items"]
+
+                if not artistas_spotify:
+                    st.info("No se encontraron artistas.")
+                for artista in artistas_spotify:
+                    st.write(artista["name"])
+                    st.write(artista["external_urls"]["spotify"])
+            except Exception as e:
+                st.error(f"Error en la búsqueda: {e}")
