@@ -12,6 +12,7 @@ def conectar_supabase():
     url = st.secrets["SUPABASE_URL"].strip().rstrip("/")
     key = st.secrets["SUPABASE_KEY"].strip()
     st.write("URL configurada:", url.split("//")[-1].split("/")[0])
+    st.write("URL API:", url + "/rest/v1/")
     return create_client(url, key)
 
 try:
