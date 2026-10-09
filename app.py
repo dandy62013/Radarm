@@ -18,7 +18,7 @@ def conectar_supabase():
 try:
     supabase = conectar_supabase()
     st.write("URL base:", url)
-st.write("Tabla configurada:", "artists")
+    st.write("Tabla configurada:", "artists")
     st.success("Base de datos conectada")
 except Exception as e:
     st.error("No se pudo conectar con Supabase. Revisa los Secrets.")
