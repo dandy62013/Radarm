@@ -102,3 +102,20 @@ with st.form("new_artist", clear_on_submit=True):
             st.rerun()
 
 st.caption("Prototipo en desarrollo · Verifica los datos y las puntuaciones antes de contratar artistas.")
+st.divider()
+st.subheader("🧪 Prueba Supabase")
+
+try:
+    from supabase import create_client
+
+    test_url = st.secrets["SUPABASE_URL"].strip().rstrip("/")
+    test_key = st.secrets["SUPABASE_KEY"].strip()
+
+    test_supabase = create_client(test_url, test_key)
+    resultado = test_supabase.table("artists").select("id, name").limit(5).execute()
+
+    st.success("✅ La API de Supabase responde correctamente")
+    st.write(resultado.data)
+
+except Exception as e:
+    st.error(f"❌ Error de Supabase: {e}")
