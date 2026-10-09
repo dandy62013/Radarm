@@ -650,6 +650,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
+
 with st.expander("Explorar Spotify"):
     nombre_spotify = st.text_input(
         "Buscar artista en Spotify",
@@ -672,18 +673,19 @@ with st.expander("Explorar Spotify"):
                     },
                     timeout=15,
                 )
-                
-if respuesta.status_code != 200:
-    st.error(
-        f"Spotify HTTP {respuesta.status_code}: "
-        f"{respuesta.text}"
-    )
-else:
-    artistas_spotify = respuesta.json()["artists"]["items"]
-    if not artistas_spotify:
-        st.info("No se encontraron artistas.")
-    for artista in artistas_spotify:
-        st.write(artista["name"])
-        st.write(artista["external_urls"]["spotify"])
+
+                if respuesta.status_code != 200:
+                    st.error(
+                        f"Spotify HTTP {respuesta.status_code}: "
+                        f"{respuesta.text}"
+                    )
+                else:
+                    resultados = respuesta.json()["artists"]["items"]
+                    if not resultados:
+                        st.info("No se encontraron artistas.")
+                    for artista in resultados:
+                        st.write(artista["name"])
+                        st.write(artista["external_urls"]["spotify"])
+
             except Exception as e:
                 st.error(f"Error en la búsqueda: {e}")
