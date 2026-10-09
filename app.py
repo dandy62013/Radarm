@@ -27,8 +27,9 @@ def cargar_artistas():
 st.subheader("🔎 Buscar artistas")
 try:
     artistas = cargar_artistas()
-except Exception:
-    st.error("No se pudieron cargar los artistas. Comprueba la tabla y sus permisos en Supabase.")
+
+except Exception as e:
+    st.error(f"Error al cargar artistas: {e}")
     st.stop()
 
 busqueda = st.text_input("Buscar por nombre")
