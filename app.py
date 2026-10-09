@@ -672,13 +672,18 @@ with st.expander("Explorar Spotify"):
                     },
                     timeout=15,
                 )
-                respuesta.raise_for_status()
-                artistas_spotify = respuesta.json()["artists"]["items"]
-
-                if not artistas_spotify:
-                    st.info("No se encontraron artistas.")
-                for artista in artistas_spotify:
-                    st.write(artista["name"])
-                    st.write(artista["external_urls"]["spotify"])
+                
+if respuesta.status_code != 200:
+    st.error(
+        f"Spotify HTTP {respuesta.status_code}: "
+        f"{respuesta.text}"
+    )
+else:
+    artistas_spotify = respuesta.json()["artists"]["items"]
+    if not artistas_spotify:
+        st.info("No se encontraron artistas.")
+    for artista in artistas_spotify:
+        st.write(artista["name"])
+        st.write(artista["external_urls"]["spotify"])
             except Exception as e:
                 st.error(f"Error en la búsqueda: {e}")
