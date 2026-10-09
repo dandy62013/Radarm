@@ -252,7 +252,7 @@ hr {
 # ─────────────────────────────────────────────
 
 st.markdown("""
-<div class="musem-logo">musem<span>✳</span></div>
+<div class="musem-logo">musem></div>
 <div class="musem-tag">Nuevos sonidos. Nuevos escenarios.</div>
 
 <div class="hero">
@@ -265,7 +265,7 @@ st.markdown("""
         Descubre artistas emergentes, encuentra nuevos sonidos
         y conecta el talento con los escenarios donde merece estar.
     </div>
-    <div class="hero-decoration">✳ ♫ ✳</div>
+  
 </div>
 """, unsafe_allow_html=True)
 
@@ -279,7 +279,7 @@ col_artista, col_festival = st.columns(2, gap="medium")
 with col_artista:
     st.markdown("""
     <div class="role-card role-artist">
-        <div style="font-size:2rem;">🎤</div>
+        <div style="font-size:2rem;"></div>
         <h3>Para artistas</h3>
         <p>Un espacio para descubrir nuevos proyectos
         musicales y dar visibilidad al talento emergente.</p>
@@ -289,7 +289,7 @@ with col_artista:
 with col_festival:
     st.markdown("""
     <div class="role-card role-festival">
-        <div style="font-size:2rem;">🎪</div>
+        <div style="font-size:2rem;"></div>
         <h3>Para festivales</h3>
         <p>Explora propuestas musicales, encuentra nuevos
         nombres y descubre quién podría formar parte del cartel.</p>
@@ -546,7 +546,7 @@ st.divider()
 
 st.markdown("""
 <div class="section-kicker">La escena está creciendo</div>
-<h2 style="margin-top:0;">Añadir artista ✨</h2>
+<h2 style="margin-top:0;">Añadir artista </h2>
 <p style="color:#776D83;">
 Incorpora un nuevo proyecto musical a tu radar.
 </p>
