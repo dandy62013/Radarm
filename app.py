@@ -648,3 +648,11 @@ st.markdown("""
     </span>
 </div>
 """, unsafe_allow_html=True)
+
+with st.expander("Conexión Spotify"):
+    if st.button("Probar conexión con Spotify"):
+        try:
+            token = obtener_token_spotify()
+            st.success("Conexión con Spotify correcta.")
+        except Exception as e:
+            st.error(f"No se pudo conectar: {e}")
