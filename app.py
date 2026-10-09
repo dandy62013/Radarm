@@ -21,7 +21,7 @@ except Exception as e:
     st.stop()
 
 def cargar_artistas():
-    respuesta = supabase.table("artists").select("*").order("created_at", desc=True).execute()
+    respuesta = supabase.table("artists").select("id").limit(1).execute()
     return respuesta.data
 
 st.subheader("🔎 Buscar artistas")
