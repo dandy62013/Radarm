@@ -4,6 +4,32 @@ from supabase import create_client
 import requests
 import base64
 
+def obtener_token_spotify():
+    import requests
+    import base64
+    import streamlit as st
+
+    client_id = st.secrets["SPOTIFY_CLIENT_ID"]
+    client_secret = st.secrets["SPOTIFY_CLIENT_SECRET"]
+
+    credenciales = f"{client_id}:{client_secret}"
+    codificadas = base64.b64encode(
+        credenciales.encode()
+    ).decode()
+
+    respuesta = requests.post(
+        "https://accounts.spotify.com/api/token",
+        headers={
+            "Authorization": f"Basic {codificadas}",
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        data={"grant_type": "client_credentials"},
+        timeout=15,
+    )
+
+    respuesta.raise_for_status()
+    return respuesta.json()["access_token"]
+
 st.set_page_config(
     page_title="MUSEM — Música emergente",
     page_icon="🎨",
