@@ -668,7 +668,7 @@ with st.expander("Explorar Spotify"):
                     params={
                         "q": nombre_spotify.strip(),
                         "type": "artist",
-                        "limit": 5
+                        "limit": 1
                     },
                     timeout=15,
                 )
