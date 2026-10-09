@@ -9,9 +9,10 @@ st.caption("Tu radar de talento para festivales.")
 
 @st.cache_resource
 def conectar_supabase():
-    url = st.secrets["SUPABASE_URL"]
-    key = st.secrets["SUPABASE_KEY"]
-    return create_client(url, key)
+    url = st.secrets["SUPABASE_URL"].strip().rstrip("/")
+key = st.secrets["SUPABASE_KEY"].strip()
+st.write("URL configurada:", url.split("//")[-1].split("/")[0])
+return create_client(url, key)
 
 try:
     supabase = conectar_supabase()
